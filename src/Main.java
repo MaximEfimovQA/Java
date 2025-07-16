@@ -51,7 +51,7 @@ public class Main {
                     break;
 
                 case 2: // Оптимизация по цене
-                    System.out.print("Введите максимальный вес (г): ");
+                    System.out.print("Введите максимальную цену (г): ");
                     // Вызываем метод оптимизации, передаем введенный пользователем вес
                     box.optimizeByPrice(scanner.nextDouble());
                     System.out.println("Оптимизация по цене выполнена!");

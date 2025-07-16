@@ -65,29 +65,54 @@ public class SweetBoxArray implements SweetBox {
     // Метод оптимизации коробки по весу
     @Override
     public void optimizeByWeight(double maxWeight) {
-        // Пока текущий вес превышает максимальный и коробка не пуста
-        while (getTotalWeight() > maxWeight && !sweets.isEmpty()) {
-            // Находим самую легкую сладость:
-            Sweet lightest = sweets.stream()
-                    // Сортируем по весу (по возрастанию)
-                    .min(Comparator.comparingDouble(Sweet::getWeight))
-                    // Если список пуст, выбросит исключение
-                    .orElseThrow();
-            // Удаляем найденную сладость
-            sweets.remove(lightest);
+        System.out.println("Текущий вес коробки: " + getTotalWeight() + " г");
+        System.out.println("Количество сладостей: " + sweets.size());
+
+        // Если вес уже не превышает лимит
+        if (getTotalWeight() <= maxWeight) {
+            System.out.println("Оптимизация не требуется - вес уже в пределах нормы!");
+            return;
         }
+
+        while (getTotalWeight() > maxWeight && !sweets.isEmpty()) {
+            Sweet lightest = sweets.stream()
+                    .min(Comparator.comparingDouble(Sweet::getWeight))
+                    .orElseThrow();
+
+            System.out.println("\nУдаляем: " + lightest);
+
+            sweets.remove(lightest);
+
+            System.out.println("Осталось сладостей: " + sweets.size());
+        }
+
+        System.out.println("Итоговый вес: " + getTotalWeight() + " г");
     }
 
     // Метод оптимизации коробки по цене
     @Override
     public void optimizeByPrice(double maxWeight) {
-        // Аналогично оптимизации по весу, но:
+        System.out.println("Текущая цена коробки: " + getTotalWeight() + " rub");
+        System.out.println("Количество сладостей: " + sweets.size());
+
+        // Если вес уже не превышает лимит
+        if (getTotalWeight() <= maxWeight) {
+            System.out.println("Оптимизация не требуется - вес уже в пределах нормы!");
+            return;
+        }
+
         while (getTotalWeight() > maxWeight && !sweets.isEmpty()) {
-            // Ищем самую дешевую сладость
             Sweet cheapest = sweets.stream()
                     .min(Comparator.comparingDouble(Sweet::getPrice))
                     .orElseThrow();
+
+            System.out.println("\nУдаляем: " + cheapest);
+
             sweets.remove(cheapest);
+
+            System.out.println("Осталось сладостей: " + sweets.size());
         }
+
+        System.out.println("Итоговая цена: " + getTotalWeight() + " rub");
     }
 }
