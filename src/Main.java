@@ -10,11 +10,11 @@ public class Main {
 
         // Начальное наполнение коробки сладостями:
 
-        box.addSweet(new Snickers("Snickers", 50.5, 57, 16));
+        box.addSweet(new Snickers("Snickers", 60, 90, 16));
 
-        box.addSweet(new Mars("Mars", 55, 75, 23));
+        box.addSweet(new Mars("Mars", 55, 100, 23));
 
-        box.addSweet(new Bounty("Bounty", 70, 80, "75%"));
+        box.addSweet(new Bounty("Bounty", 100, 60, "75%"));
 
         box.addSweet(new Kinder("Kinder", 120, 170, "Копатыч"));
 
@@ -50,11 +50,11 @@ public class Main {
                     System.out.println("Оптимизация по весу выполнена!");
                     break;
 
-                case 2: // Оптимизация по цене
-                    System.out.print("Введите максимальную цену (rub): ");
+                case 2: // Оптимизация по весу
+                    System.out.print("Введите максимальную весу (rub): ");
                     // Вызываем метод оптимизации, передаем введенный пользователем вес
                     box.optimizeByPrice(scanner.nextDouble());
-                    System.out.println("Оптимизация по цене выполнена!");
+                    System.out.println("Оптимизация по весу выполнена!");
                     break;
 
                 case 3: // Добавление сладостей
