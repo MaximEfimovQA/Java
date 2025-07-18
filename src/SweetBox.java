@@ -34,3 +34,4 @@ public interface SweetBox {
     // Удаляет самые дешевые сладости, пока вес не станет <= maxWeight
     void optimizeByPrice(double maxWeight);
 }
+
