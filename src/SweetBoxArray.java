@@ -147,7 +147,7 @@ public class SweetBoxArray implements SweetBox {
 
             System.out.println("Удаляем: " + cheapest.getName() +
                     " (цена: " + cheapest.getPrice() + " руб, вес: " +
-                    cheapest.getWeight() + " г) " + cheapest.getUniqueParameter());
+                    cheapest.getWeight() + " г) | " + cheapest.getUniqueParameter());
 
             sweets.remove(cheapest);
             removedCount++;
