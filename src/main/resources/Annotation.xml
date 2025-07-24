@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Включаем сканирование аннотаций -->
+    <context:component-scan base-package="javaAnnotation.Annotation" />
+
+    <!-- Задаем значения для полей Engine и Suspension -->
+    <bean id="starter" class="java.lang.String">
+        <constructor-arg value="Electric Starter" />
+    </bean>
+
+    <bean id="sparkPlug" class="java.lang.String">
+        <constructor-arg value="Iridium Spark Plug" />
+    </bean>
+
+    <bean id="hinge" class="java.lang.String">
+        <constructor-arg value="Steel Hinge" />
+    </bean>
+
+    <bean id="differential" class="java.lang.String">
+        <constructor-arg value="Limited Slip Differential" />
+    </bean>
+
+</beans>

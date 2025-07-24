@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Wheel -->
+    <bean id="wheel" class="com.example.demo.xml.Wheel">
+        <constructor-arg value="Alloy"/>
+    </bean>
+
+    <!-- Accumulator -->
+    <bean id="accumulator" class="com.example.demo.xml.Accumulator">
+        <constructor-arg value="60"/>
+    </bean>
+
+    <!-- Engine (с вложенными Starter и SparkPlug) -->
+    <bean id="engine" class="com.example.demo.xml.Engine">
+        <constructor-arg>
+            <bean class="com.example.demo.xml.Engine.Starter">
+                <constructor-arg value="Bosch"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.example.demo.xml.Engine.SparkPlug">
+                <constructor-arg value="NGK"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <!-- Suspension (с вложенными Hinge и Differential) -->
+    <bean id="suspension" class="com.example.demo.xml.Suspension">
+        <constructor-arg>
+            <bean class="com.example.demo.xml.Suspension.Hinge">
+                <constructor-arg value="Steel"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.example.demo.xml.Suspension.Differential">
+                <constructor-arg value="Limited-slip"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <!-- Car (главный бин) -->
+    <bean id="car" class="com.example.demo.xml.Car">
+        <constructor-arg ref="wheel"/>
+        <constructor-arg ref="engine"/>
+        <constructor-arg ref="accumulator"/>
+        <constructor-arg ref="suspension"/>
+    </bean>
+</beans>
