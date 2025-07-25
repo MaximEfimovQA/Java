@@ -1,20 +1,16 @@
 package javaAnnotation.Annotation;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Engine {
-    private String starter;
-    private String sparkPlug;
+    private final String starter;
+    private final String sparkPlug;
 
-    @Autowired
-    public void setStarter(String starter) {
+    public Engine(@Value("${engine.starter}") String starter,
+                  @Value("${engine.sparkPlug}") String sparkPlug) {
         this.starter = starter;
-    }
-
-    @Autowired
-    public void setSparkPlug(String sparkPlug) {
         this.sparkPlug = sparkPlug;
     }
 

@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Car {
-    private Wheel wheel;
-    private Engine engine;
-    private Accumulator accumulator;
-    private Suspension suspension;
+    private final Wheel wheel;
+    private final Engine engine;
+    private final Accumulator accumulator;
+    private final Suspension suspension;
 
     @Autowired
     public Car(Wheel wheel, Engine engine, Accumulator accumulator, Suspension suspension) {
@@ -20,10 +20,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car components:\n"
-                + "- " + wheel + "\n"
-                + "- " + engine + "\n"
-                + "- " + accumulator + "\n"
-                + "- " + suspension;
+        return "Car components:\n- " + wheel + "\n- " + engine +
+                "\n- " + accumulator + "\n- " + suspension;
     }
 }

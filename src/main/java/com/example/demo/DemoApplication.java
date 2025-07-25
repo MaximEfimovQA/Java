@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-@ImportResource("classpath:beans.xml")
+@ImportResource("classpath:beansXMLmetod.xml")
 public class DemoApplication {
 
 	public static void main(String[] args) {
