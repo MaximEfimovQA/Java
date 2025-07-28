@@ -6,6 +6,8 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import jakarta.annotation.PostConstruct;
 import spring_boot_stub.dto.PostRequest;
@@ -52,20 +54,40 @@ public class MainController {
 
     @PostMapping("/postRequest")
     public ResponseEntity<String> postRequest(@RequestBody PostRequest request) {
-        // Валидация
-        if (request.name() == null || request.surname() == null || request.age() == null) {
-            return error("Все поля обязательны");
+        if (request.name() == null || request.name().trim().isEmpty() ||
+                request.surname() == null || request.surname().trim().isEmpty() ||
+                request.age() == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Все поля обязательны");
         }
 
-        // Подстановка значений
-        String response = postAnswerTemplate
-                .replace("{name}", request.name())
-                .replace("{surname}", request.surname())
-                .replace("{age}", String.valueOf(request.age()))
-                .replace("{age}*2", String.valueOf(request.age() ));
 
-        return ResponseEntity.ok(response);
+            String stage1 = postAnswerTemplate
+                    .replace("{name}", request.name())
+                    .replace("{surname}", request.surname())
+                    .replace("{age}", String.valueOf(request.age()));
+
+            String stage2 = evaluateExpressions(stage1);
+
+            return ResponseEntity.ok(stage2);
+
     }
+
+    private String evaluateExpressions(String template) {
+        Pattern pattern = Pattern.compile("(\\d+)\\s*\\*\\s*(\\d+)");
+        Matcher matcher = pattern.matcher(template);
+
+        StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            int a = Integer.parseInt(matcher.group(1));
+            int b = Integer.parseInt(matcher.group(2));
+            matcher.appendReplacement(result, String.valueOf(a * b));
+        }
+        matcher.appendTail(result);
+
+        return result.toString();
+    }
+
 
     private ResponseEntity<String> error(String message) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
